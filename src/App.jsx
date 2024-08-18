@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import "./App.css";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
@@ -22,15 +21,8 @@ function App() {
   const totalFeedback =
     allFeedback.good + allFeedback.neutral + allFeedback.bad;
   const positiveFeedback = Math.round((allFeedback.good / totalFeedback) * 100);
+
   const updateFeedback = (feedbackType) => {
-    // if (type === "reset") {
-    //   setAllFeedback({ good: 0, neutral: 0, bad: 0 });
-    // } else {
-    //   setAllFeedback((prevState) => ({
-    //     ...prevState,
-    //     [type]: prevState[type] + 1,
-    //   }));
-    // }
     setAllFeedback((prevState) => {
       if (feedbackType === "reset") {
         return { good: 0, neutral: 0, bad: 0 };
@@ -47,12 +39,10 @@ function App() {
         Please leave your feedback about our service by selecting one of the
         options below.
       </p>
-      <Options buttonName="Good" onClick={() => updateFeedback("good")} />
-      <Options buttonName="Neutral" onClick={() => updateFeedback("neutral")} />
-      <Options buttonName="Bad" onClick={() => updateFeedback("bad")} />
+      <Options options={["good", "neutral", "bad"]} onClick={updateFeedback} />
 
       {totalFeedback > 0 && (
-        <Options buttonName="Reset" onClick={() => updateFeedback("reset")} />
+        <Options options={["reset"]} onClick={updateFeedback} />
       )}
 
       {totalFeedback > 0 ? (

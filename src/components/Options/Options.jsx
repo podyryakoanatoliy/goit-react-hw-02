@@ -1,9 +1,17 @@
 import css from "./Options.module.css";
 
-export default function Options({ buttonName, onClick }) {
+export default function Options({ options, onClick }) {
   return (
-    <button className={css.mainButton} onClick={onClick}>
-      {buttonName}
-    </button>
+    <div>
+      {options.map((option) => (
+        <button
+          key={option}
+          className={css.mainButton}
+          onClick={() => onClick(option)}
+        >
+          {option.charAt(0).toUpperCase() + option.slice(1)}
+        </button>
+      ))}
+    </div>
   );
 }
