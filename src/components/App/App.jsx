@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import "./App.css";
-import Feedback from "./components/Feedback/Feedback";
-import Options from "./components/Options/Options";
-import Notification from "./components/Notification/Notification";
+import "./App.module.css";
+import Feedback from "../Feedback/Feedback";
+import Options from "../Options/Options";
+import Notification from "../Notification/Notification";
+import Description from "../Description/Description";
 
 const getInitialIndex = () => {
   const savedFeedback = window.localStorage.getItem("article-idx");
@@ -34,16 +35,12 @@ function App() {
 
   return (
     <>
-      <h1>Sip Happens Café</h1>
-      <p>
-        Please leave your feedback about our service by selecting one of the
-        options below.
-      </p>
-      <Options options={["good", "neutral", "bad"]} onClick={updateFeedback} />
-
-      {totalFeedback > 0 && (
-        <Options options={["reset"]} onClick={updateFeedback} />
-      )}
+      <Description />
+      <Options
+        options={["good", "neutral", "bad"]}
+        onClick={updateFeedback}
+        showReset={totalFeedback > 0}
+      />
 
       {totalFeedback > 0 ? (
         <Feedback
